@@ -1,0 +1,1 @@
+mvn clean test && allure generate -c -o target/reports/allure && allure open target/reports/allure
