@@ -44,8 +44,10 @@ public class TestBase implements GlobalVariables{
 		chromePrefs.put("download.default_directory", DOWNLOAD_FOLDER);  
 		ChromeOptions options = new ChromeOptions();  
 		options.setExperimentalOption("prefs", chromePrefs);  
-		options.addArguments("--disable-notifications");  
-		DesiredCapabilities cap = DesiredCapabilities.chrome();  
+		options.addArguments("--disable-notifications");
+		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--no-sandbox");
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
 		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);  
 		cap.setCapability(ChromeOptions.CAPABILITY, options); 
 		WebDriver driver = new  ChromeDriver(options);
