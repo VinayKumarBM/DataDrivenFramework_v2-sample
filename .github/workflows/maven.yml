@@ -30,8 +30,8 @@ jobs:
         
     - name:  Install Google Chrome
       run:   |
-              chmod +x ./scripts/InstallChrome.sh
-              ./scripts/InstallChrome.sh 
+              chmod +x ./InstallChrome.sh
+              ./InstallChrome.sh 
     # Make sure you put workflow kit action on top of all the steps 
     - name: Collect Workflow Telemetry
       uses: runforesight/foresight-workflow-kit-action@v1
