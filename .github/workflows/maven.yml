@@ -27,6 +27,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+        
+    - name:  Install Google Chrome
+      run:   |
+              chmod +x ./scripts/InstallChrome.sh
+              ./scripts/InstallChrome.sh 
     # Make sure you put workflow kit action on top of all the steps 
     - name: Collect Workflow Telemetry
       uses: runforesight/foresight-workflow-kit-action@v1
@@ -34,8 +39,8 @@ jobs:
       with:
         api_key: 2d1d2190-d8e1-4d0c-8f20-180f2e97a263
         
-    - name: Run Tests
-      run: mvn test
+    - name: Build with Maven
+      run: mvn test --file pom.xml
     
     - name: Analyze Test and/or Coverage Results
       uses: runforesight/foresight-test-kit-action@v1
@@ -47,8 +52,7 @@ jobs:
 #   test_path: <test_results_path_optional>
 #     - name: Run Tests
 #       run: mvn test
-#     - name: Build with Maven
-#       run: mvn -B package --file pom.xml
+#     
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #     - name: Update dependency graph
