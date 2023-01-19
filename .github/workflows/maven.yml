@@ -1,0 +1,60 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name:  Install Google Chrome
+      run:   |
+              chmod +x ./scripts/InstallChrome.sh
+              ./scripts/InstallChrome.sh 
+    # Make sure you put workflow kit action on top of all the steps 
+    - name: Collect Workflow Telemetry
+      uses: runforesight/foresight-workflow-kit-action@v1
+      if: ${{ always() }}
+      with:
+        api_key: 2d1d2190-d8e1-4d0c-8f20-180f2e97a263
+        
+    - name: Build with Maven
+      run: mvn test --file pom.xml
+    
+    - name: Analyze Test and/or Coverage Results
+      uses: runforesight/foresight-test-kit-action@v1
+      if: ${{ always() }}
+      with:
+        api_key: 2d1d2190-d8e1-4d0c-8f20-180f2e97a263
+        test_format: TestNG
+        test_framework: TestNG
+#   test_path: <test_results_path_optional>
+#     - name: Run Tests
+#       run: mvn test
+#     
+
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+#     - name: Update dependency graph
+#       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+    
