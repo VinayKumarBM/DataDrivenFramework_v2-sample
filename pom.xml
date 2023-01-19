@@ -1,6 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ddt</groupId>
 	<artifactId>DataDrivenTesting-Sample</artifactId>
@@ -11,12 +10,15 @@
 		<testng.version>7.4.0</testng.version>
 		<log4j.version>2.14.1</log4j.version>
 		<webdriver.version>4.4.3</webdriver.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
 		<poi.version>5.0.0</poi.version>
 		<extentreports.version>5.0.8</extentreports.version>
 		<maven.version>3.0.0-M5</maven.version>
 		<aspectj.version>1.9.7.M3</aspectj.version>
 		<allure.version>2.14.0</allure.version>
 		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
+		<maven.compiler.source>1.8</maven.compiler.source>
 		<skipTests>false</skipTests>
 	</properties>
 	<dependencies>
@@ -75,6 +77,12 @@
 			<artifactId>ashot</artifactId>
 			<version>1.5.4</version>
 		</dependency>
+		<dependency>
+      <groupId>com.browserstack</groupId>
+      <artifactId>browserstack-java-sdk</artifactId>
+      <version>LATEST</version>
+      <scope>compile</scope>
+    </dependency>
 	</dependencies>
 
 	<build>
@@ -106,9 +114,7 @@
 					</suiteXmlFiles>
 					<skipTests>${skipTests}</skipTests>
 					<testFailureIgnore>true</testFailureIgnore>
-					<argLine>
-						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-					</argLine>
+					<argLine>-javaagent:${com.browserstack:browserstack-java-sdk:jar}</argLine>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -118,6 +124,18 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>getClasspathFilenames</id>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 		</plugins>
 	</build>
 </project>
