@@ -49,7 +49,7 @@ jobs:
         api_key: 2d1d2190-d8e1-4d0c-8f20-180f2e97a263
         test_format: TestNG
         test_framework: TestNG
-#   test_path: <test_results_path_optional>
+        test_path: ./target/surefire-reports/
 #     - name: Run Tests
 #       run: mvn test
 #     

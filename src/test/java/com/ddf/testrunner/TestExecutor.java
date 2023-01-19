@@ -17,6 +17,7 @@ public class TestExecutor implements GlobalVariables{
 		for(String scenario : excel.getScenariosToRun(SCENARIO_SHEET_NAME, RUN_MODE_COLUMN, TEST_CASE_COLUMN)) {
 			tests.add(createObject(scenario));
 		}
+		System.out.println("******* " + tests.size());
 		return tests.toArray();
 	}
 
