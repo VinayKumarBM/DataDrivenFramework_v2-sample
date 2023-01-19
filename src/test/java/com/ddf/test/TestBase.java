@@ -47,6 +47,7 @@ public class TestBase implements GlobalVariables{
 		options.addArguments("--disable-notifications");
 		options.addArguments("--disable-dev-shm-usage");
 		options.addArguments("--no-sandbox");
+		options.addArguments("--headless");
 		DesiredCapabilities cap = DesiredCapabilities.chrome();
 		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);  
 		cap.setCapability(ChromeOptions.CAPABILITY, options); 

@@ -28,13 +28,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version
+#    - uses: browser-actions/setup-chrome@latest
+#    - run: chrome --version
         
-#    - name:  Install Google Chrome
-#      run:   |
-#              chmod +x ./InstallChrome.sh
-#              ./InstallChrome.sh
+    - name:  Install Google Chrome
+      run:   |
+              chmod +x ./InstallChrome.sh
+              ./InstallChrome.sh
     # Make sure you put workflow kit action on top of all the steps 
     - name: Collect Workflow Telemetry
       uses: runforesight/foresight-workflow-kit-action@v1
@@ -43,7 +43,7 @@ jobs:
         api_key: 2d1d2190-d8e1-4d0c-8f20-180f2e97a263
         
     - name: Build with Maven
-      run: mvn test --file pom.xml
+      run: mvn clean test --file pom.xml
     
     - name: Analyze Test and/or Coverage Results
       uses: runforesight/foresight-test-kit-action@v1
