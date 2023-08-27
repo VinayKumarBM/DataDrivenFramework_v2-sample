@@ -68,6 +68,7 @@ public class HomePageSteps {
 		HttpURLConnection huc = null;
 		if(url != null){		
 			try {
+				HttpURLConnection.setFollowRedirects(false);
 				huc = (HttpURLConnection)(new URL(url).openConnection());
 				huc.connect();
 				int respCode = huc.getResponseCode();

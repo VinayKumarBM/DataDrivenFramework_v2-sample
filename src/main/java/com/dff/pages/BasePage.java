@@ -22,7 +22,7 @@ public class BasePage implements GlobalVariables{
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
 		wait = new WebDriverWait(driver, EXPLICIT_WAIT);
-		PageFactory.initElements(new AjaxElementLocatorFactory(driver, EXPLICIT_WAIT), this);
+		PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIME_OUT), this);
 	}
 
 	protected void click(String xpathExpression) {
@@ -127,7 +127,7 @@ public class BasePage implements GlobalVariables{
 	
 	public void waitForPageLoad() {
 		pause(1);
-		WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_WAIT+EXPLICIT_WAIT);
+		WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_WAIT);
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");

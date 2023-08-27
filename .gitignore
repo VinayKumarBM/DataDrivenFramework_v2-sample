@@ -31,3 +31,4 @@ test-output/
 allure-report/
 allure-results/
 *.png
+downloads/

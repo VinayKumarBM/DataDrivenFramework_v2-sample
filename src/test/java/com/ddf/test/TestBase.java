@@ -2,13 +2,10 @@ package com.ddf.test;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -22,8 +19,6 @@ import com.dff.listeners.TestListener;
 import com.dff.reports.ReportManager;
 import com.dff.utils.Directory;
 import com.dff.utils.ExcelUtil;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 @Listeners({TestListener.class})
 public class TestBase implements GlobalVariables{
@@ -39,22 +34,19 @@ public class TestBase implements GlobalVariables{
 
 	@BeforeMethod (alwaysRun = true)
 	public void setup(Method method) {
-		WebDriverManager.chromiumdriver().setup();
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();  
 		chromePrefs.put("download.default_directory", DOWNLOAD_FOLDER);  
 		ChromeOptions options = new ChromeOptions();  
 		options.setExperimentalOption("prefs", chromePrefs);  
-		options.addArguments("--disable-notifications");  
-		DesiredCapabilities cap = DesiredCapabilities.chrome();  
-		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);  
-		cap.setCapability(ChromeOptions.CAPABILITY, options); 
+		options.addArguments("--remote-allow-origins=*");  
+		options.setAcceptInsecureCerts(true);
 		WebDriver driver = new  ChromeDriver(options);
 		driver.get(BASE_URL);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT);
 		wait = new WebDriverWait(driver, EXPLICIT_WAIT);
 		DriverManager.getInstance().setDriver(driver);
-		ReportManager.startTest(method.getClass().getName());
+		ReportManager.startTest(method.getName());
 	}
 
 	@AfterMethod (alwaysRun = true)

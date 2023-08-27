@@ -30,7 +30,7 @@ private static final Logger log = LogManager.getLogger(ScreenshotUtil.class);
 		Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
 				.takeScreenshot(DriverManager.getInstance().getDriver());
 		try {
-			ImageIO.write(screenshot.getImage(),"PNG",new File(screenShotFilePath));
+			ImageIO.write(screenshot.getImage(),"PNG",new File(screenShotFilePath));			
 		} catch (IOException exp) {
 			log.error("Exception occured while taking ScreenShot: ", exp);
 		}

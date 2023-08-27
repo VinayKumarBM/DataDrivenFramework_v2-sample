@@ -29,10 +29,10 @@ public class PDFUtil implements GlobalVariables{
 	}
 
 	private static void waitUntilDownloadCompleted(File pdfFile) throws InterruptedException {
-		for(int i=0; i< DOWNLOAD_WAIT/IMPLICIT_WAIT; i++) {
+		for(int i=0; i< DOWNLOAD_WAIT/10; i++) {
 			if (pdfFile.exists())
 				break;
-			Thread.sleep(IMPLICIT_WAIT*1000);
+			Thread.sleep(5000);
 			System.out.println("Waiting for file download");
 		}
 	}

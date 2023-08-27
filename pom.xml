@@ -7,28 +7,23 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<selenium.version>3.141.59</selenium.version>
+		<selenium.version>4.11.0</selenium.version>
 		<testng.version>7.4.0</testng.version>
-		<log4j.version>2.14.1</log4j.version>
-		<webdriver.version>4.4.3</webdriver.version>
-		<poi.version>5.0.0</poi.version>
-		<extentreports.version>5.0.8</extentreports.version>
-		<maven.version>3.0.0-M5</maven.version>
+		<log4j.version>2.20.0</log4j.version>
+		<poi.version>5.2.3</poi.version>
+		<extentreports.version>5.1.0</extentreports.version>
+		<maven.version>3.1.2</maven.version>
 		<aspectj.version>1.9.7.M3</aspectj.version>
 		<allure.version>2.14.0</allure.version>
 		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
 		<skipTests>false</skipTests>
+		<threads>5</threads>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>${webdriver.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -75,16 +70,21 @@
 			<artifactId>ashot</artifactId>
 			<version>1.5.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.28</version>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
 				<configuration>
-					<source>1.8</source> <!--For JAVA 8 use 1.8 -->
-					<target>1.8</target> <!--For JAVA 8 use 1.8 -->
+					<source>17</source>
+					<target>17</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -101,6 +101,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<threadCount>${threads}</threadCount>
 					<suiteXmlFiles>
 						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 					</suiteXmlFiles>

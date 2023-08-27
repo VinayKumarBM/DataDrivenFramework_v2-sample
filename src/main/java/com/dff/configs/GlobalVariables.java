@@ -1,6 +1,7 @@
 package com.dff.configs;
 
 import java.io.File;
+import java.time.Duration;
 
 public interface GlobalVariables {
 
@@ -29,8 +30,9 @@ public interface GlobalVariables {
 	String TEST_PACKAGE = "com.ddf.test.%s";
 	
 	// Time unit in seconds
-	int EXPLICIT_WAIT = Integer.valueOf(Config.getProperty("explicitWait"));	//15;
-	int IMPLICIT_WAIT = Integer.valueOf(Config.getProperty("implicitWait"));	//5;
+	int TIME_OUT = Integer.valueOf(Config.getProperty("explicitWait"));
+	Duration EXPLICIT_WAIT = Duration.ofSeconds(Long.valueOf(Config.getProperty("explicitWait"))); // 15;
+	Duration IMPLICIT_WAIT = Duration.ofSeconds(Long.valueOf(Config.getProperty("implicitWait"))); //Integer.valueOf(Config.getProperty("implicitWait"));	//5;
 	int DOWNLOAD_WAIT = Integer.valueOf(Config.getProperty("downloadTime"));	//60;
 	int MAX_TRY = Config.getProperty("retry").equalsIgnoreCase("TRUE")? 1: 0;	//1;
 	
