@@ -27,17 +27,23 @@ For Demo purpose all the test cases are created for [Demo Web Shop](http://demow
 ## **Running Test:**
 All the test to be executed can be configured in TestData.xlsx sheet placed in below path.<br><br>
 src\test\resources\data\TestData.xlsx<br><br>
-List all the tests to be executed in Sanity or Regression sheet. Update the config.properties file sheet parameter with sheet that needs to be run.
-<br><br>
+List all the tests to be executed in Sanity or Regression sheet. Update the config.properties file sheet parameter with sheet (Eg: Regression/Sanity) that needs to be executed.
+
 Open the command prompt and navigate to the folder in which pom.xml file is present.
 Run the below Maven command.
 
     mvn clean test -Dthreads=10
 
-This will run 10 test cases in parallel (default thread count is 1). 
+This will run 10 test cases in parallel (default thread count is 1).
+
+You can also change the execution sheet at run time by using set command as shown below. This will override the sheet value in config.properties file.
+
+    set sheet=Sanity && mvn clean test -Dthreads=10
+
+
 Once the execution completes report will be generated in below folder structure.
 
-**Extent Report:** 	*/target/reports/extent/index.html
+**Extent Report:** 	./target/reports/extent/index.html
 
 **Allure Report:** To generate the report we need to go through below steps.
 
@@ -48,3 +54,5 @@ To generate the report from existing Allure results use below command.
 After the report is generated, open it in system browser using below command.
 
     allure open allure-report
+
+**Execution Log:**  Logs generated at run time will be available at ./target/logs/automation.log
