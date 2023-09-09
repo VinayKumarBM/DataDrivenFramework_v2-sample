@@ -24,6 +24,6 @@ public class Config implements GlobalVariables{
 		} catch (IOException e) {
 			Log.error("There was a IO Exception: ", e);
 		} 
-		return properties.getProperty(key);
+		return properties.getProperty(key).trim();
 	}
 }

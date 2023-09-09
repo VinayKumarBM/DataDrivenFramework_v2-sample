@@ -17,7 +17,7 @@
 		<allure.version>2.14.0</allure.version>
 		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
 		<skipTests>false</skipTests>
-		<threads>5</threads>
+		<threads>1</threads>
 	</properties>
 	<dependencies>
 		<dependency>

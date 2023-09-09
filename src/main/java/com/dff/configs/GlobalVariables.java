@@ -11,7 +11,7 @@ public interface GlobalVariables {
 	String NOT_APPLICABLE = "NA";
 	
 	String WORKBOOK = Config.getProperty("workbook");	//"TestData.xlsx";
-	String SCENARIO_SHEET_NAME = Config.getProperty("sheet");	//"Scenarios";
+	String SCENARIO_SHEET_NAME = System.getenv("sheet") != null ? System.getenv("sheet").trim(): Config.getProperty("sheet");	//"Regression";
 	int RUN_MODE_COLUMN = 3;
 	int TEST_CASE_COLUMN = 1;
 	String RUN_MODE_YES = "YES";
