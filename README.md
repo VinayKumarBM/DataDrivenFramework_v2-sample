@@ -55,4 +55,4 @@ After the report is generated, open it in system browser using below command.
 
     allure open allure-report
 
-**Execution Log:**  Logs generated at run time will be available at ./target/logs/automation.log
+**Execution Log:**  Logs generated at the time of test execution will be available at ./target/logs/automation.log
